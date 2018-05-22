@@ -3,9 +3,9 @@ import axios from 'axios';
 
 export function loginProcess(dispatch,login) {
     dispatch(Actions.fetchLogin())
-
     axios.get('https://noodledistress.herokuapp.com/user/login/'+login).then(res => {
         if(res.status === 200){
+            console.log(login)
             dispatch(Actions.loginSucces(res.data))
         }
         else{

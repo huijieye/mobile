@@ -1,21 +1,29 @@
 import React, { Component } from 'react';
-import { AppRegistry, TextInput } from 'react-native';
+import {TextInput,Button,View,Text } from 'react-native';
+import {loginProcess} from '../../_commun/src/process/User'
+import {connect} from 'react-redux';
 
-export default class Login extends Component {
+class Login extends Component {
     constructor(props) {
         super(props);
-        this.state = { text: 'Useless Placeholder' };
+        this.state = {text: null};
     }
 
     render() {
+
         return (
-            <TextInput
-                style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-                onChangeText={(text) => this.setState({text})}
-                value={this.state.text}
-            />
+            <View>
+                <Text>Identifiant</Text>
+                <TextInput
+                    style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+                    onChangeText={(text) => this.setState({text})}
+                    value={this.state.text}
+                />
+                <Button onPress={()=>loginProcess(this.props.dispatch,this.state.text)} title="Connecter"/>
+            </View>
+
         );
     }
 }
 
-AppRegistry.registerComponent('AwesomeProject', () => Login);
+export default connect()(Login)
